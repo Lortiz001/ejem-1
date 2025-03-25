@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Aprende las Tablas de Multiplicar!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f8ff;
+        }
+
+        #app {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #pregunta {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>¡Aprende las Tablas de Multiplicar!</h1>
+        <div id="pregunta"></div>
+        <input type="number" id="respuesta">
+        <button id="verificar">Verificar</button>
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        const preguntaElement = document.getElementById('pregunta');
+        const respuestaInput = document.getElementById('respuesta');
+        const verificarButton = document.getElementById('verificar');
+        const resultadoElement = document.getElementById('resultado');
+
+        let numero1, numero2, respuestaCorrecta;
+
+        function generarPregunta() {
+            numero1 = Math.floor(Math.random() * 10) + 1;
+            numero2 = Math.floor(Math.random() * 10) + 1;
+            respuestaCorrecta = numero1 * numero2;
+            preguntaElement.textContent = `¿Cuánto es ${numero1} x ${numero2}?`;
+            respuestaInput.value = '';
+            respuestaInput.focus();
+        }
+
+        verificarButton.addEventListener('click', () => {
+            const respuestaUsuario = parseInt(respuestaInput.value);
+            if (respuestaUsuario === respuestaCorrecta) {
+                resultadoElement.textContent = '¡Correcto! ¡Muy bien!';
+                resultadoElement.style.color = 'green';
+            } else {
+                resultadoElement.textContent = `Incorrecto. La respuesta es ${respuestaCorrecta}. ¡Inténtalo de nuevo!`;
+                resultadoElement.style.color = 'red';
+            }
+            generarPregunta();
+        });
+
+        generarPregunta();
+    </script>
+</body>
+</html>
